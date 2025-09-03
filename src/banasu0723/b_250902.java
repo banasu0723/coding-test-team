@@ -15,21 +15,21 @@ public class b_250902 {
         Stack<Integer> stack = new Stack<Integer>(); // Stack 객체 생성
         StringBuilder sb = new StringBuilder(); // 출력 성능 향상
 
-        for(int i=0; i<N; i++){
+        for (int i = 0; i < N; i++) {
 
             // 입력을 받고 공백 기준으로 문자열 나눠주기
             StringTokenizer st = new StringTokenizer(br.readLine());
             String S = st.nextToken();
 
             // 명령 확인
-            switch(S){
+            switch (S) {
                 case "push":
                     stack.push(Integer.parseInt(st.nextToken()));
                     break;
                 case "pop":
-                    if(stack.isEmpty()) {
+                    if (stack.isEmpty()) {
                         sb.append(-1).append("\n");
-                    }else{
+                    } else {
                         sb.append(stack.pop()).append("\n");
                     }
                     break;
@@ -37,16 +37,16 @@ public class b_250902 {
                     sb.append(stack.size()).append("\n");
                     break;
                 case "empty":
-                    if(stack.isEmpty()){
+                    if (stack.isEmpty()) {
                         sb.append(1).append("\n");
-                    }else{
+                    } else {
                         sb.append(0).append("\n");
                     }
                     break;
                 case "top":
-                    if(stack.isEmpty()){
+                    if (stack.isEmpty()) {
                         sb.append(-1).append("\n");
-                    }else{
+                    } else {
                         sb.append(stack.peek()).append("\n");
                     }
                     break;
