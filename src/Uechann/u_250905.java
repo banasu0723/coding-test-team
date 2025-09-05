@@ -43,6 +43,11 @@ public class u_250905 {
             q.add(i);
         }
 
+        if(n==1) {
+            System.out.println("1"); 
+            return;
+        }
+        
         while (true) {
             q.poll();
             if (q.size() == 1) {
