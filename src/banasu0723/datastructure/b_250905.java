@@ -1,4 +1,4 @@
-package banasu0723;
+package banasu0723.datastructure;
 
 import java.io.BufferedReader;
 import java.io.IOException;

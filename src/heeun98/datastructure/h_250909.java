@@ -1,4 +1,4 @@
-package heeun98;
+package heeun98.datastructure;
 
 import java.io.BufferedReader;
 import java.io.IOException;

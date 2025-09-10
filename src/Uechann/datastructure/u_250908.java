@@ -1,4 +1,4 @@
-package Uechann;
+package Uechann.datastructure;
 
 import java.io.BufferedReader;
 import java.io.IOException;

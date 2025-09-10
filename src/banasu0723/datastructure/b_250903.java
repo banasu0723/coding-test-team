@@ -1,35 +1,42 @@
-package banasu0723;
+package banasu0723.datastructure;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class b_250907 {
-    // 10816번 - 숫자 카드2
+public class b_250903 {
     public static void main(String[] args) throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
         int N = Integer.parseInt(br.readLine());
-        Map<Integer, Integer> cardMap = new HashMap<>();
-
+        int[] A = new int[N];
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         for(int i = 0; i < N; i++){
-            int num = Integer.parseInt(st.nextToken());
-            cardMap.put(num, cardMap.getOrDefault(num, 0) + 1);
+            A[i] = Integer.parseInt(st.nextToken());
         }
+
+        // 이진 탐색을 위한 정렬
+        Arrays.sort(A);
 
         int M = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
         for(int i = 0; i < M; i++){
-            int target = Integer.parseInt(st.nextToken());
-            // 해당 숫자 개수 출력 , 없으면 0
-            sb.append(cardMap.getOrDefault(target, 0)).append(" ");
+            int num = Integer.parseInt(st.nextToken());
+
+            if(Arrays.binarySearch(A, num) >= 0){
+                sb.append("1\n");
+            } else {
+                sb.append("0\n");
+            }
         }
 
         System.out.println(sb);
+
+
     }
 }
