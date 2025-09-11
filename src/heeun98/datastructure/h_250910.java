@@ -3,9 +3,7 @@ package heeun98.datastructure;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class h_250910 {
 
@@ -20,32 +18,34 @@ public class h_250910 {
 
 
         int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
 
 
-        List<Integer> list = new ArrayList<>();
+        Queue<Integer> queue = new LinkedList<>();
+
         for (int i = 1; i <= n; i++) {
-            list.add(i);
-        }
-        int idx = 0;
-        while (list.size() > 0) {
-
-            idx = (idx + m - 1) % list.size();
-
-            Integer remove = list.remove(idx);
-
-
-            System.out.println(remove);
+            queue.offer(i);
         }
 
-        /**
-         * idx = 0
-         * idx = 2
-         * idx = 4
-         * idx = 8
-         */
+        StringBuilder sb = new StringBuilder("<");
+
+        while (!queue.isEmpty()) {
 
 
+            for (int i = 0; i < k - 1; i++) {
+                Integer poll = queue.poll();
+                queue.offer(poll);
+            }
+            Integer poll = queue.poll();
+            if (queue.size() == 0) {
+                sb.append(poll + ">");
+                continue;
+            }
+            sb.append(poll + ", ");
+        }
+
+
+        System.out.println(sb);
 
 
     }
