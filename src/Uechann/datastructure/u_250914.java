@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -72,7 +71,6 @@ public class u_250914 {
             int count = 0;
             while (!q.isEmpty()) {
                 Map.Entry<Integer, Integer> front = q.poll();
-                System.out.println(front);
 
                 // 우선순위가 더 큰값이 있으면 큐에 다시 add
                 boolean flag = q.stream()
@@ -86,7 +84,7 @@ public class u_250914 {
                     // 출력된 요소의 Key가 M이면 sb에 추가 후 break
                     if (front.getKey() == M) {
                         sb.append(count).append("\n");
-                        continue;
+                        break;
                     }
                 }
             }
