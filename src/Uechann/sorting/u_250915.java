@@ -1,4 +1,4 @@
-package Uechann.datastructure;
+package Uechann.sorting;
 
 import java.io.BufferedReader;
 import java.io.IOException;
