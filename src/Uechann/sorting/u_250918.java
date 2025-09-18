@@ -53,7 +53,7 @@ public class u_250918 {
 
         dots.stream()
                 .sorted(
-                    Comparator.comparingInt((int[] d) -> d[0])  //1차 비교 기준
+                    Comparator.comparingInt(d -> d[0])  //1차 비교 기준
                               .thenComparing(d -> d[1])         //2차 비교 기준
                 )
                 .forEach(d -> System.out.println(d[0] + " " + d[1]));
