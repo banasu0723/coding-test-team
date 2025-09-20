@@ -6,9 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 /* 
  * 문제 10814
@@ -41,7 +39,6 @@ public class u_250919 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-        Map<Integer, String> members = new TreeMap<>();
         List<String[]> m = new ArrayList<>();
 
         int n = Integer.parseInt(br.readLine());
@@ -51,9 +48,6 @@ public class u_250919 {
             // members.put(Integer.parseInt(st.nextToken()), st.nextToken());
             m.add(new String[]{st.nextToken(), st.nextToken()});
         }
-
-        // members.entrySet().stream()
-        //         .forEach(entry -> System.out.println(entry.getKey() + " " + entry.getValue()));
 
         m.stream()
             .sorted(Comparator.comparing((String[] a)-> Integer.parseInt(a[0])))
