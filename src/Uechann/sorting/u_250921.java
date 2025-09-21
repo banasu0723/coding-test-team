@@ -1,5 +1,15 @@
 package Uechann.sorting;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
 /* 
  * 문제 1931
 한 개의 회의실이 있는데 이를 사용하고자 하는 N개의 회의에 대하여 회의실 사용표를 만들려고 한다. 
@@ -33,7 +43,45 @@ package Uechann.sorting;
  */
 
 public class u_250921 {
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        int max = 0, count = 0, start, end;
+        List<Map<String, Integer>> meeting = new ArrayList<>();
+
+        int n = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
+            start = Integer.parseInt(st.nextToken());
+            end = Integer.parseInt(st.nextToken());
+            Map<String, Integer> m = new HashMap<String, Integer>();
+            m.put("start", start);
+            m.put("end", end);
+
+            meeting.add(m);
+        }
+        // start를 기준으로 정렬
+        List<Map<String, Integer>> orderMeeting = meeting.stream()
+                .sorted(Comparator.comparing((Map<String, Integer> m) -> m.get("start")))
+                .toList();
+
+        start = end = 0;
+
+        for (int i = 0; i < n; i++) {
+            count = 1;
+            end = orderMeeting.get(i).get("end");
+
+            for (int j = i + 1; j < n; j++) {
+                if (orderMeeting.get(j).get("start") > end) {
+                    end = orderMeeting.get(j).get("end");
+                    count++;
+                }
+            }
+            if (count > max) max = count;
+        }
+
+        System.out.println(max);
     }
 }
