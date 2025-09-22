@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 /* 
@@ -47,8 +45,8 @@ public class u_250921 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        int max = 0, count = 0, start, end;
-        List<Map<String, Integer>> meeting = new ArrayList<>();
+        int count = 0, start, end;
+        List<int[]> meeting = new ArrayList<>();
 
         int n = Integer.parseInt(br.readLine());
 
@@ -56,32 +54,23 @@ public class u_250921 {
             st = new StringTokenizer(br.readLine());
             start = Integer.parseInt(st.nextToken());
             end = Integer.parseInt(st.nextToken());
-            Map<String, Integer> m = new HashMap<String, Integer>();
-            m.put("start", start);
-            m.put("end", end);
 
-            meeting.add(m);
+            meeting.add(new int[] { start, end });
         }
-        // start를 기준으로 정렬
-        List<Map<String, Integer>> orderMeeting = meeting.stream()
-                .sorted(Comparator.comparing((Map<String, Integer> m) -> m.get("start")))
-                .toList();
+        // end를 기준으로 정렬
+        meeting.sort(Comparator.comparing((int[] a) -> a[1])
+                        .thenComparing(a -> a[0]));
 
-        start = end = 0;
+        end = 0;
 
-        for (int i = 0; i < n; i++) {
-            count = 1;
-            end = orderMeeting.get(i).get("end");
-
-            for (int j = i + 1; j < n; j++) {
-                if (orderMeeting.get(j).get("start") > end) {
-                    end = orderMeeting.get(j).get("end");
-                    count++;
-                }
+        // 가장 빨리 끝나는 회의부터 선택
+        for (int[] m : meeting) {
+            if (m[0] >= end) {
+                count++;
+                end = m[1]; // 끝나는 시간 업데이트
             }
-            if (count > max) max = count;
         }
 
-        System.out.println(max);
+        System.out.println(count);
     }
 }
