@@ -63,7 +63,7 @@ N×M크기의 배열로 표현되는 미로가 있다.
 1111111
  */
 
-public class u_250923 {
+public class u_250923_1 {
     // 인접 행렬
     static int[][] matrix;
     static boolean[][] isVisted;
