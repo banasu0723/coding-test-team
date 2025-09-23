@@ -3,8 +3,6 @@ package Uechann.graph_traversal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -97,7 +95,6 @@ public class u_250922 {
             for (int i = 1; i < flag.length; i++) {
                 if (matrix[start][i] && !flag[i] && !q.contains(i)) {
                     q.add(i);
-                    System.out.println(i + "추가");
                 }
             }
         }
