@@ -3,60 +3,59 @@ package heeun98.graph_traversal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class h_250924 {
 
-    public static int[] dx = {1, -1, 0, 0};
-    public static int[] dy = {0, 0 , 1, -1};
-
     public static void main(String[] args) throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        int input = Integer.parseInt(br.readLine());
+        int size = Integer.parseInt(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int[][] arr = new int[n][m];
-        boolean[][] visit = new boolean[n][m];
-        int[][] distance = new int[n][m];
+        List<ArrayList<Integer>> list = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            String input = br.readLine();
-            for (int j = 0; j < m; j++) {
-                String[] split = input.split("");
-                arr[i][j] = Integer.parseInt(split[j]);
-            }
+        for (int i = 0; i <= input; i++) {
+            list.add(new ArrayList<>());
         }
 
-        Queue<int[]> queue = new LinkedList<>();
-        queue.add(new int[]{0, 0});
+        for (int i = 0; i < size ; i++) {
+            String str = br.readLine();
+            StringTokenizer st = new StringTokenizer(str);
+
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+
+            list.get(start).add(end);
+            list.get(end).add(start);
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+
+        boolean[] visit = new boolean[input + 1];
+        queue.add(1);
+        visit[1] = true;
+        int count = 0;
 
         while (!queue.isEmpty()) {
 
-            int[] poll = queue.poll();
-            int r = poll[0];
-            int c = poll[1];
+            Integer poll = queue.poll();
+            ArrayList<Integer> integers = list.get(poll);
 
-            for (int i = 0; i < 4; i++) {
-                int nr = r + dx[i];
-                int nc = c + dy[i];
+            for (int i = 0; i < integers.size(); i++) {
+                Integer num = integers.get(i);
 
-                if (nr < 0 || nr >= n || nc < 0 || nc >= m) continue;
-
-                if (arr[nr][nc] == 0) continue;
-
-                if (visit[nr][nc]) continue;;
-
-                visit[nr][nc] = true;
-                distance[nr][nc] = distance[r][c] + 1;
-                queue.offer(new int[]{nr, nc});
+                if (visit[num]) {
+                    continue;
+                }
+                queue.add(num);
+                visit[num] = true;
+                count++;
             }
         }
 
-        System.out.println(distance[n - 1][m - 1] + 1);
+        System.out.println(count);
 
 
     }
