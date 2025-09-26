@@ -1,94 +1,63 @@
 package heeun98.graph_traversal;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class h_250923 {
 
-    static boolean[] visit;
+    public static int[] dx = {1, -1, 0, 0};
+    public static int[] dy = {0, 0 , 1, -1};
 
     public static void main(String[] args) throws IOException {
-
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int n = Integer.parseInt(st.nextToken());
         int m = Integer.parseInt(st.nextToken());
-        int v = Integer.parseInt(st.nextToken());
+        int[][] arr = new int[n][m];
+        boolean[][] visit = new boolean[n][m];
+        int[][] distance = new int[n][m];
 
-        visit = new boolean[n + 1];
-
-        List<ArrayList<Integer>> list = new ArrayList<>();
-
-        for (int i = 0; i <= n; i++) {
-            list.add(new ArrayList<>());
-        }
-
-        for (int i = 0 ; i < m; i++) {
-            st = new StringTokenizer(br.readLine());
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
-
-            ArrayList<Integer> starts = list.get(start);
-            ArrayList<Integer> integers = list.get(end);
-
-            starts.add(end);
-            integers.add(start);
-        }
-        for (int i = 1; i <= n; i++) {
-            ArrayList<Integer> sorts = list.get(i);
-            sorts.sort((o1, o2) -> o1 - o2);
-        }
-
-        dfs(list, visit, v);
-
-        for (int i = 0; i <= n; i++) {
-            visit[i] = false;
-        }
-        System.out.println();
-
-        bfs(list,visit, v);
-
-    }
-
-    static void dfs(List<ArrayList<Integer>> list , boolean[] visit, int start) {
-
-        System.out.print(start + " ");
-        visit[start] = true;
-        ArrayList<Integer> node = list.get(start);
-
-        for (int i = 0; i < node.size(); i++) {
-            Integer n = node.get(i);
-            if (visit[n] == true) {
-                continue;
+        for (int i = 0; i < n; i++) {
+            String input = br.readLine();
+            for (int j = 0; j < m; j++) {
+                String[] split = input.split("");
+                arr[i][j] = Integer.parseInt(split[j]);
             }
-
-            dfs(list,visit,n);
         }
 
-    }
-
-    static void bfs(List<ArrayList<Integer>> list , boolean[] visit, int start) {
-
-        System.out.print(start + " ");
-        Queue<Integer> queue  = new LinkedList<>();
-        queue.add(start);
-        visit[start] = true;
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{0, 0});
 
         while (!queue.isEmpty()) {
 
-            Integer poll = queue.poll();
+            int[] poll = queue.poll();
+            int r = poll[0];
+            int c = poll[1];
 
-            for (int j = 0 ; j < list.get(poll).size(); j++) {
-                if (visit[list.get(poll).get(j)] == true)  continue;
-                visit[list.get(poll).get(j)] = true;
-                System.out.print(list.get(poll).get(j) + " ");
-                queue.add(list.get(poll).get(j));
+            for (int i = 0; i < 4; i++) {
+                int nr = r + dx[i];
+                int nc = c + dy[i];
+
+                if (nr < 0 || nr >= n || nc < 0 || nc >= m) continue;
+
+                if (arr[nr][nc] == 0) continue;
+
+                if (visit[nr][nc]) continue;;
+
+                visit[nr][nc] = true;
+                distance[nr][nc] = distance[r][c] + 1;
+                queue.offer(new int[]{nr, nc});
             }
         }
+
+        System.out.println(distance[n - 1][m - 1] + 1);
+
 
     }
 }
