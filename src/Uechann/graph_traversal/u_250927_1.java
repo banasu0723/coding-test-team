@@ -58,7 +58,7 @@ import java.util.StringTokenizer;
 1
  */
 
-public class u_250927 {
+public class u_250927_1 {
 
     static boolean[][] matrix;
     static boolean[][] isVisted;
