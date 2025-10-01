@@ -48,7 +48,7 @@ import java.util.StringTokenizer;
 1
  */
 
-public class u_250930_2 {
+public class u_251001_1 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -69,7 +69,7 @@ public class u_250930_2 {
             int v = Integer.parseInt(st.nextToken());
 
             list.get(u).add(v);
-            list.get(v).add(v);
+            list.get(v).add(u);
         }
 
         boolean[] isVisited = new boolean[n + 1];
@@ -87,8 +87,8 @@ public class u_250930_2 {
     public static void bfs(int start, boolean[] isVisited, List<List<Integer>> list) {
 
         Queue<Integer> q = new LinkedList<>();
-        q.add(start);
         isVisited[start] = true;
+        q.add(start);
 
         while (!q.isEmpty()) {
             int u = q.poll();
