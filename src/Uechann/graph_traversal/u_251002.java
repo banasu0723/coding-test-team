@@ -99,7 +99,7 @@ import java.util.StringTokenizer;
 3
  */
 
-public class u_251001_2 {
+public class u_251002 {
 
     static int[][] matrix;
     static boolean[][] isVisited;
