@@ -52,6 +52,7 @@ public class u_251003 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
 
         int v = Integer.parseInt(st.nextToken());
         int e = Integer.parseInt(st.nextToken());
@@ -78,12 +79,10 @@ public class u_251003 {
         daijstra(k);
 
         for (int i = 1; i <= v; i++) {
-            if (distance[i] == Integer.MAX_VALUE) {
-                System.out.println("INF");
-            } else {
-                System.out.println(distance[i]);
-            }
+            sb.append(distance[i] == Integer.MAX_VALUE ? "INF" : distance[i]).append("\n"); 
         }
+
+        System.out.println(sb);
     }
 
     public static void daijstra(int start) {
@@ -98,7 +97,6 @@ public class u_251003 {
         while (!pq.isEmpty()) {
             int[] current = pq.poll();
             int vertex = current[0];
-            int dis = current[1];
 
             isVisited[vertex] = true;
 
@@ -107,9 +105,8 @@ public class u_251003 {
                     .forEach(v -> {
                         if (distance[v[0]] > distance[current[0]] + v[1]) {
                             distance[v[0]] = distance[current[0]] + v[1];
+                            pq.add(new int[] { v[0], distance[v[0]] });
                         }
-
-                        pq.add(new int[] { v[0], distance[v[0]] });
                     });
         }
     }
