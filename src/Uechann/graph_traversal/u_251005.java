@@ -121,7 +121,7 @@ public class u_251005 {
             int r = u[1];
             int c = u[2];
             int depth = u[3];
-            System.out.println("현재: " + he + ", " + r + ", " + c + "");
+            // System.out.println("현재: " + he + ", " + r + ", " + c + "");
 
             if (depth > maxdepth)
                 maxdepth = depth;
@@ -138,7 +138,7 @@ public class u_251005 {
                         q.add(new int[] { nh, nr, nc, depth + 1 });
                         // isVisited[nh][nr][nc] = true;
                         matrix[nh][nr][nc] = 1;
-                        System.out.println("큐에 추가: " + nh + ", " + nr + ", " + nc + "");
+                        // System.out.println("큐에 추가: " + nh + ", " + nr + ", " + nc + "");
                     }
                 }
             }
