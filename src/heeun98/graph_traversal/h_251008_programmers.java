@@ -1,7 +1,7 @@
 package heeun98.graph_traversal;
 import java.util.*;
 
-public class h_251008 {
+public class h_251008_programmers {
 
 
     /**
