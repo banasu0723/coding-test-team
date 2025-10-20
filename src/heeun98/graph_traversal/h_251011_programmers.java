@@ -12,7 +12,9 @@ public class h_251011_programmers {
 
         Queue<int[]> queue = new LinkedList<>();
         PriorityQueue<Integer> pr =
-                new PriorityQueue<>(Collections.reverseOrder());// 기본 최소힙 구조
+                new PriorityQueue<>(Collections.reverseOrder());
+
+        // 최대힙, 최소힙을 적극 사용하자
 
         for (int i = 0; i < priorities.length; i++) {
             queue.add(new int[]{priorities[i], i});
