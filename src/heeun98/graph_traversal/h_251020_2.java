@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class h_251021_2 {
+public class h_251020_2 {
 
     static int n;
     static int[] dx = {1, -1, 0, 0};
@@ -64,10 +64,7 @@ public class h_251021_2 {
 
         System.out.println(maxResult);
 
-
-
     }
-
 
     static void bfs(int r, int c, int[][] water, boolean[][] visit) {
 

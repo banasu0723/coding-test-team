@@ -3,59 +3,70 @@ package heeun98.graph_traversal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class h_251021 {
+
+    private static int[] dx = {1, 1, -1, -1, 2, 2, -2, -2};
+    private static int[] dy = {2, -2, 2, -2, 1, -1, 1, -1};
 
     public static void main(String[] args) throws IOException {
 
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int input = Integer.parseInt(br.readLine());
+        int test = Integer.parseInt(br.readLine());
 
-        List<ArrayList<Integer>> gr = new ArrayList<>();
+        for (int i = 0; i < test; i++) {
 
-        for (int i = 0; i <= input; i++) {
-            gr.add(new ArrayList());
-        }
 
-        for (int i = 0; i < input - 1 ; i++) {
+            int size = Integer.parseInt(br.readLine());
+            int[][] gr = new int[size][size];
+            boolean[][] visit = new boolean[size][size];
+            int[][] distance = new int[size][size];
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int nodeA = Integer.parseInt(st.nextToken());
-            int nodeB = Integer.parseInt(st.nextToken());
-            gr.get(nodeA).add(nodeB);
-            gr.get(nodeB).add(nodeA);
-        }
-
-        int[] parents = new int[input + 1];
-        boolean[] visit = new boolean[input + 1];
-
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(1);
-        visit[1] = true;
+            int[] start = {Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())};
+            st = new StringTokenizer(br.readLine());
+            int[] end = {Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())};
 
 
-        while (!queue.isEmpty()) {
-            Integer poll = queue.poll();
+            if (start[0] == end[0] && start[1] == end[1]) {
+                System.out.println(0);
+                continue;
+            }
 
-            for (int i = 0; i < gr.get(poll).size(); i++) {
-                Integer num = gr.get(poll).get(i);
-                if (visit[num]) continue;
-                parents[num] = poll;
-                visit[num] = true;
-                queue.add(num);
+            Queue<int[]> queue = new LinkedList<>();
+            queue.add(new int[]{start[0], start[1]});
+            visit[start[0]][start[1]] = true;
+
+            while (!queue.isEmpty()) {
+                int[] poll = queue.poll();
+                int cr = poll[0];
+                int cc = poll[1];
+
+                for (int j = 0; j < 8; j++) {
+
+                    int nc = cc + dx[j];
+                    int nr = cr + dy[j];
+
+                    if (nc < 0 || nc >= size || nr < 0 || nr >= size) continue;
+
+                    if (visit[nr][nc]) continue;
+
+                    distance[nr][nc] = distance[cr][cc] + 1;
+                    queue.add(new int[]{nr, nc});
+                    visit[nr][nc] = true;
+
+                }
+            }
+
+            System.out.println(distance[end[0]][end[1]]);
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 2; i < parents.length; i++) {
-
-            sb.append(parents[i] + "\n");
-        }
-        System.out.println(sb);
 
 
-
-    }
 }
