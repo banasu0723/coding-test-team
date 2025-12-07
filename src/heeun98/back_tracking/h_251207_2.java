@@ -72,7 +72,6 @@ public class h_251207_2 {
             pos[r][c] = 0;
             dfs(i + 1,count + 1);
             pos[r][c] = 2;
-
         }
 
     }
