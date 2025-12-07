@@ -126,16 +126,6 @@ public class u_251207 {
             }
         }
 
-        // 모든 집의 치킨 거리를 계산하고 더해서 도시의 치킨 거리 계산 (최단 거리 계산 DFS? BFS?)
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= M; j++) {
-                if (graph[i][j] == 1) {
-                    int chickenDistance = bfs(i, j, N, graph);
-                    // System.out.println(i + ", " + j + ": 치킨 거리 :" + chickenDistance);
-                }
-            }
-        }
-
         // 치킨집 리스트 생성
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
