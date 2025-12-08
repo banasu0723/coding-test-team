@@ -49,27 +49,24 @@ public class u_251208 {
             numbers.add(Integer.parseInt(st.nextToken()));
         }
 
-        // 수열들의 모든 부분 수열의 조합들 생성
+        // 수열들의 모든 부분 수열의 조합들 생성 (bitmask 버전)
         List<List<Integer>> subsetCombination = new ArrayList<>();
-
         for (int mask = 0; mask < (1 << N); mask++) {
             List<Integer> subset = new ArrayList<>();
-
             for (int i = 0; i < N; i++) {
-
-                if((mask & (1 << i)) != 0) {
-
+                if ((mask & (1 << i)) != 0) {
                     subset.add(numbers.get(i));
                 }
             }
             subsetCombination.add(new ArrayList<>(subset));
         }
 
-        subsetCombination.forEach(subset -> {
-        System.out.println(subset.toString());
-        });
+        // subsetCombination.forEach(subset -> {
+        //     System.out.println(subset.toString());
+        // });
 
         int resultCount = (int) subsetCombination.stream()
+                .filter(sub -> sub.size() != 0)
                 .filter(sub -> sub.stream().mapToInt(Integer::intValue).sum() == S)
                 .count();
 
