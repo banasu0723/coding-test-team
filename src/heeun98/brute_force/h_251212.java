@@ -17,19 +17,16 @@ public class h_251212 {
 
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-
         StringTokenizer st = new StringTokenizer(br.readLine());
-
 
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
         numbers = new int[n];
 
-
         String input = br.readLine();
         st = new StringTokenizer(input);
+
         for (int i = 0; i < n; i++) {
             numbers[i] = Integer.parseInt(st.nextToken());
         }
@@ -49,5 +46,7 @@ public class h_251212 {
         for (int i = idx; i < n; i++) {
             dfs(i + 1, count + 1, sum + numbers[i]);
         }
+
+
     }
 }
