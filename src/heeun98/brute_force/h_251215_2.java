@@ -44,28 +44,35 @@ public class h_251215_2 {
 
     private static void makeChess(char[][] board) {
 
-
-        char[][] chess = new char[8][8];
-
         for (int sr = 0; sr <= n - 8; sr++) {
             for (int sc = 0; sc <= m - 8; sc++) {
-                chess = new char[8][8];
-                for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 8; j++) {
-                        char cell = board[sr + i][sc + j];
-                        chess[i][j] = cell;
-                    }
-                }
-                result = Math.min(result, bfs(chess));
+                result = Math.min(result, check(board, sr, sc));
             }
         }
 
 
     }
 
+    private static int check(char[][] board, int sr, int sc) {
 
-    static int bfs(char[][] chess) {
+        int wStart = 0;
+        int bStart = 0;
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                char current = board[sr + i][sc + j];
+
+                char expectedW = (i + j) % 2 == 0 ? 'W' : 'B';
+                char expectedB = (i + j) % 2 == 0 ? 'B' : 'W';
+
+                if (current != expectedW) wStart++;
+                if (current != expectedB) bStart++;
+            }
+        }
 
 
+        return Math.min(wStart, bStart);
     }
+
+
 }
