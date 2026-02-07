@@ -1,4 +1,4 @@
-package heeun98.test;
+package heeun98.greedy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,47 +8,61 @@ import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class h_t_1 {
+public class h_g_4 {
+
 
     public static void main(String[] args) throws IOException {
-
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int n = Integer.parseInt(br.readLine());
 
-        Lecture[] lectures = new Lecture[n];
         int maxDay = 0;
 
+        Lecture[] lectures = new Lecture[n];
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+
         for (int i = 0; i < n; i++) {
-            String s = br.readLine();
-            StringTokenizer st = new StringTokenizer(s);
+            String input = br.readLine();
+            StringTokenizer st = new StringTokenizer(input);
+
             int price = Integer.parseInt(st.nextToken());
             int day = Integer.parseInt(st.nextToken());
+
             maxDay = Math.max(maxDay, day);
-            lectures[i] = new Lecture(price, day);
+
+            Lecture lecture = new Lecture(price, day);
+            lectures[i] = lecture;
         }
 
 
         Arrays.sort(lectures, (l1, l2) -> {
-            return l2.day - l1.day;
+            return -1 * (l1.day - l2.day);
         });
 
 
-        int start = 0;
-        int idx = 0;
         int sum = 0;
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        for (int day = maxDay; day >= 1; day--) {
 
-            while (idx < n && day == lectures[idx].day) {
 
-                pq.offer(lectures[idx].price);
-                idx++;
+
+        for (int i = 0; i < lectures.length; i++) {
+
+            if (maxDay > lectures[i].day) {
+                sum += pq.poll();
+                maxDay = lectures[i].day;
             }
-            if (pq.isEmpty()) continue;
-            sum += pq.poll();
+
+            pq.offer(lectures[i].price);
         }
+
+        sum += pq.poll();
+        maxDay--;
+
+        while(maxDay > 0 && !pq.isEmpty()) {
+            sum += pq.poll();
+            maxDay--;
+        }
+
 
         System.out.println(sum);
     }
@@ -61,7 +75,6 @@ public class h_t_1 {
             this.price = price;
             this.day = day;
         }
+
     }
-
-
 }

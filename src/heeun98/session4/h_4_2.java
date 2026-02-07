@@ -13,31 +13,39 @@ public class h_4_2 {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String a = br.readLine();
-        Map<Character, Integer> map1 = new HashMap<>();
-        String b = br.readLine();
-        Map<Character, Integer> map2 = new HashMap<>();
+        String input = br.readLine();
+        Map<Character, Integer> map = new HashMap<>();
 
-        if (a.length() != b.length()) {
-            System.out.println("NO");
-            return;
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
         }
 
+        String s = br.readLine();
 
-        for (int i = 0; i < a.length(); i++) {
-            map1.put(a.charAt(i), map1.getOrDefault(a.charAt(i), 0) + 1);
-            map2.put(b.charAt(i), map2.getOrDefault(b.charAt(i), 0) + 1);
-        }
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
 
-        for (Character c : map1.keySet()) {
-            if (map1.get(c) != map2.get(c)) {
+            if (!map.containsKey(c)) {
                 System.out.println("NO");
                 return;
             }
+
+            if (map.get(c) > 1) {
+                map.put(c, map.get(c) - 1);
+                continue;
+            }
+
+            if (map.get(c) == 1) {
+                map.remove(c);
+            }
         }
 
-        System.out.println("YES");
-
+        if (map.isEmpty()) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
 
     }
 }
